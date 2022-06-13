@@ -3,12 +3,14 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 
-describe('backend-express-template routes', () => {
+describe('books routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
-  it('example test - delete me!', () => {
-    expect(1).toEqual(1);
+  it('GET /books should return a list of books rendering id, title and release year', () => {
+    const res = request(app).get('/books');
+    const books = Book.getAll();
+    expect(res.body).toEqual(books);
   });
   afterAll(() => {
     pool.end();
