@@ -31,6 +31,27 @@ describe('books routes', () => {
     expect(resp.body.id).toBe('1');
     expect(resp.body.title).toEqual('The Lord of the Rings');
   });
+  it('POST /books should insert new book', async () => {
+    const resp = await request(app)
+      .post('/books')
+      .send({
+        title: 'American Gods',
+        release: 2001
+      });
+    expect(resp.status).toBe(200);
+    expect(resp.body.title).toEqual('American Gods');
+  });
+  it('POST /authors should insert new author', async () => {
+    const resp = await request(app)
+      .post('/authors')
+      .send({
+        name: 'Neil Gaiman',
+        dob: '1960-11-10',
+        pob: 'Hampshire, England'
+      });
+    expect(resp.status).toBe(200);
+    expect(resp.body.name).toEqual('Neil Gaiman');
+  });
   afterAll(() => {
     pool.end();
   });
