@@ -13,6 +13,11 @@ describe('books routes', () => {
     const books = Book.getAll();
     expect(res.body).toEqual(books);
   });
+  it('Get /authors should return a list of authors rendering id, name and books', () => {
+    const res = request(app).get('/authors');
+    const authors = Book.getAll();
+    expect(res.body).toEqual(authors);
+  });
   afterAll(() => {
     pool.end();
   });
